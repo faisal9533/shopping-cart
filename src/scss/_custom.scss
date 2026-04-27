@@ -1,0 +1,44 @@
+// -------------------------
+// --- You can add your custom CSS here and it will overwrite template styles.
+// -------------------------
+.search--location--mobile-header .search__suggestions {
+    max-height: calc(100vh - 80px);
+}
+ul::-webkit-scrollbar {
+    width: 0.3em;
+}
+
+ul::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.1);
+}
+
+ul::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+    outline: 1px solid #6c757d;
+}
+
+body::-webkit-scrollbar {
+    width: 0.3em;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.1);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+    outline: 1px solid #6c757d;
+}
+
+div::-webkit-scrollbar {
+    width: 0.3em;
+}
+
+div::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.1);
+}
+
+div::-webkit-scrollbar-thumb {
+    background-color: #47991f;
+    outline: 1px solid #47991f;
+}

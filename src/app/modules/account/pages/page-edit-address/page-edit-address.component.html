@@ -1,0 +1,96 @@
+<div class="card">
+    <div class="card-header">
+        <h5>Edit Address</h5>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-body">
+        <div class="row no-gutters">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <form [formGroup]="addressForm" (ngSubmit)="submitAddress()">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="checkout-first-name">* House No</label>
+                            <input type="text" class="form-control" formControlName="HouseNo" placeholder="House No">
+                            <div *ngIf="isSubmittedAddress&&addressFormData.HouseNo.errors" class="text-danger">    
+                                <p *ngIf="addressFormData.HouseNo.errors.required">Please enter house no.</p>   
+                            </div> 
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="checkout-last-name">Apartment Name</label>
+                            <input type="text" class="form-control" formControlName="ApartmentName" placeholder="Apartment Name">
+                            <div *ngIf="isSubmittedAddress&&addressFormData.ApartmentName.errors" class="text-danger">    
+                                <p *ngIf="addressFormData.ApartmentName.errors.required">Please enter apartment name.</p>   
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="checkout-company-name">Street details to locate you</label>
+                        <input type="text" class="form-control" placeholder="Street Details">
+                        <!-- formControlName="Alias" -->
+                        <!-- <div *ngIf="isSubmittedAddress&&addressFormData.Alias.errors" class="text-danger">    
+                            <p *ngIf="addressFormData.Alias.errors.required">Please enter street details.</p>   
+                        </div>  -->
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-company-name">Landmark for easy reach out</label>
+                        <input type="text" class="form-control" formControlName="LandmarkName" placeholder="Landmark Details">
+                        <div *ngIf="isSubmittedAddress&&addressFormData.LandmarkName.errors" class="text-danger">    
+                            <p *ngIf="addressFormData.LandmarkName.errors.required">Please enter landmark details.</p>   
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-company-name">Area details</label>
+                        <input type="text" class="form-control" formControlName="AreaDetails" placeholder="Area Details">
+                        <div *ngIf="isSubmittedAddress&&addressFormData.AreaDetails.errors" class="text-danger">    
+                            <p *ngIf="addressFormData.AreaDetails.errors.required">Please enter area details.</p>   
+                        </div> 
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="checkout-first-name">City</label>
+                            <input type="text" class="form-control" formControlName="City" placeholder="City">
+                            <div *ngIf="isSubmittedAddress&&addressFormData.City.errors" class="text-danger">    
+                                <p *ngIf="addressFormData.City.errors.required">Please enter city.</p>   
+                            </div> 
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="checkout-last-name">Pin Code</label>
+                            <input type="text" class="form-control" formControlName="PinCode" placeholder="Pin Code">
+                            <div *ngIf="isSubmittedAddress&&addressFormData.PinCode.errors" class="text-danger">    
+                                <p *ngIf="addressFormData.PinCode.errors.required">Please enter pincode.</p>  
+                                <p *ngIf="addressFormData.PinCode.errors.pattern">Please enter valid pincode.</p> 
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-country">Choose nick name for this address</label>
+                        <select id="checkout-country" formControlName="AddressType" class="form-control form-control-select2">
+                            <option value="default" selected disabled>Select a address type...</option>
+                            <option value="home">Home</option>
+                            <option value="office">Office</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div *ngIf="isSubmittedAddress&&addressFormData.AddressType.errors" class="text-danger">    
+                            <p *ngIf="addressFormData.AddressType.errors.required">Please enter Address type.</p>   
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-company-name">Nick name this address as</label>
+                        <input type="text" class="form-control" formControlName="Alias" placeholder="Nick name">
+                        <div *ngIf="isSubmittedAddress&&addressFormData.Alias.errors" class="text-danger">    
+                            <p *ngIf="addressFormData.Alias.errors.required">Please enter nick name.</p>   
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-company-name">Is Default Address</label>
+                        <input type="radio" [value]="true" class="form-control float-left" formControlName="DefaultAddress">
+                    </div>
+                    <div class="form-group mt-3 mb-0">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

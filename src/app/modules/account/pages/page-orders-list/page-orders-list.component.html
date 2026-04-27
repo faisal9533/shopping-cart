@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-header">
+        <h5>Order History</h5>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-table">
+        <div class="table-responsive-sm">
+            <table>
+                <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>
+                        <a *ngIf="order.PageType != 'Return'" [routerLink]="'/account/orders/' + order.OrderKey">#{{ order.id }}</a>
+                        <a *ngIf="order.PageType === 'Return'" [routerLink]="'/account/orders/' + order.OrderKey + '/return'">#{{ order.id }}</a>
+                    </td>
+                    <td>{{ order.date }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.total|currencyFormat }} for {{ order.quantity }} item(s)</td>
+                    <td>
+                        <a *ngIf="order.status === 'COMPLETED'" [routerLink]="'/account/orders-return/' + order.OrderKey">Return</a>
+                        
+                        <a *ngIf="order.status === 'NEW'" [routerLink]="" (click)='cancelOrder(order)'>Cancel</a>
+ 
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-divider"></div>
+    <!-- <div class="card-footer">
+        <app-pagination [total]="1"></app-pagination>
+    </div> -->
+</div>

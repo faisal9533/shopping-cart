@@ -1,0 +1,42 @@
+<app-block-slideshow></app-block-slideshow>
+
+<!-- <app-block-features layout="boxed"></app-block-features> -->
+<!-- 
+<app-block-products-carousel
+    layout="grid-4-sm"
+    [rows]="10"
+    [loading]="featuredProducts.loading"
+    [products]="featuredProducts.products"
+    
+></app-block-products-carousel> -->
+<app-block-products header="Our Products" layout="large-first" [products]="(bestsellers$|async) || []"></app-block-products>
+<!-- <div class="shop-layout__content">
+    <div class="block">
+        <app-products-view [layout]="viewMode" grid="grid-3-sidebar" offcanvas="mobile"></app-products-view>
+    </div>
+</div> -->
+<!-- <app-block-banner></app-block-banner> -->
+
+<!-- <app-block-products header="Bestsellers" layout="large-last" [products]="(bestsellers$|async) || []"></app-block-products> -->
+
+<!-- <app-block-categories header="Popular Categories" layout="compact" [categories]="(popularCategories$|async) || []"></app-block-categories> -->
+
+<!-- <app-block-products-carousel
+    header="New Arrivals"
+    layout="grid-5"
+    [rows]="1"
+    [loading]="latestProducts.loading"
+    [products]="latestProducts.products"
+    [groups]="latestProducts.groups"
+    (groupChange)="groupChange(latestProducts, $event)"
+></app-block-products-carousel> -->
+
+<!-- <app-block-posts header="Latest News" layout="grid-nl" [posts]="posts"></app-block-posts>
+
+<app-block-brands [brands]="(brands$|async) || []"></app-block-brands>
+
+<app-block-product-columns>
+    <app-block-product-columns-item header="Top Rated Products" [products]="(columnTopRated$|async) || []"></app-block-product-columns-item>
+    <app-block-product-columns-item header="Special Offers" [products]="(columnSpecialOffers$|async) || []"></app-block-product-columns-item>
+    <app-block-product-columns-item header="Bestsellers" [products]="(columnBestsellers$|async) || []"></app-block-product-columns-item>
+</app-block-product-columns> -->

@@ -1,0 +1,118 @@
+<app-page-header [header]="'My Account'" [breadcrumbs]="[
+    {label: 'Home',       url: '/'},
+    {label: 'My Account', url: ''}
+]"></app-page-header>
+
+<div class="block">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <app-alert *ngIf="showAlert" class="mb-3" type="primary" size="lg" [dismissible]="true" (close)="showAlert = false">
+                    {{display_register_login_page}}
+                </app-alert>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 d-flex">
+                <div class="card flex-grow-1 mb-md-0">
+                    <div class="card-body">
+                        <h3 class="card-title">Login</h3>
+                        <form  [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+                            <div class="form-group">
+                                <label>UserName</label>
+                                <input type="text" formControlName="customerLoginMobile" class="form-control" placeholder="Enter Mobile No">
+                                <div *ngIf="isSubmittedLogin&&loginFormData.customerLoginMobile.errors" class="text-danger">    
+                                    <p *ngIf="loginFormData.customerLoginMobile.errors.required">Please enter mobile.</p>   
+                                    <p *ngIf="loginFormData.customerLoginMobile.errors.pattern">Please enter valid mobile number.</p>   
+                                    <p *ngIf="loginFormData.customerLoginMobile.errors.minlength">Please enter 10 digit mobile number.</p>   
+                                    <p *ngIf="loginFormData.customerLoginMobile.errors.maxlength">Please enter 10 digit mobile number.</p>  
+                                </div> 
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" formControlName="customerLoginPassword" class="form-control" placeholder="Password">
+                                <div *ngIf="isSubmittedLogin&&loginFormData.customerLoginPassword.errors" class="text-danger">    
+                                    <p *ngIf="loginFormData.customerLoginPassword.errors.required">Please enter password.</p>    
+                                </div> 
+                                <small class="form-text text-muted">
+                                    <a routerLink="/account/forgotPassword" >Forgotten Password</a>
+                                </small>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <span class="form-check-input input-check">
+                                        <span class="input-check__body">
+                                            <input class="input-check__input" type="checkbox" id="login-remember">
+                                            <span class="input-check__box"></span>
+                                            <app-icon class="input-check__icon" name="check-9x7" size="9x7"></app-icon>
+                                        </span>
+                                    </span>
+                                    <label class="form-check-label" for="login-remember">Remember Me</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2 mt-md-3 mt-lg-4">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex mt-4 mt-md-0">
+                <div class="card flex-grow-1 mb-0">
+                    <div class="card-body">
+                        <h3 class="card-title">Register</h3>
+                        <form [formGroup]="signupForm" (ngSubmit)="submitRegister()">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" formControlName="CustomerFullName" class="form-control" placeholder="Enter full name">
+                                <div *ngIf="isSubmittedRegister&&form.CustomerFullName.errors" class="text-danger">    
+                                    <p *ngIf="form.CustomerFullName.errors.required">Please enter full name.</p>    
+                                </div> 
+                            </div>
+                            <div class="form-group">
+                                <label>Email address</label>
+                                <input type="email" formControlName="reg_email" class="form-control" placeholder="Enter email">
+                                <div *ngIf="isSubmittedRegister&&form.reg_email.errors" class="text-danger">    
+                                    <p *ngIf="form.reg_email.errors.required">Please enter email.</p>    
+                                    <p *ngIf="form.reg_email.errors.email">Please enter valid email.</p>    
+                                </div>   
+                            </div>
+                            <div class="form-group">
+                                <label>Mobile No</label>
+                                <input type="text" formControlName="reg_mobile" class="form-control" placeholder="Mobile No">
+                                <div *ngIf="isSubmittedRegister&&form.reg_mobile.errors" class="text-danger">    
+                                    <p *ngIf="form.reg_mobile.errors.required">Please enter mobile.</p>   
+                                    <p *ngIf="form.reg_mobile.errors.pattern">Please enter valid mobile number.</p>   
+                                    <p *ngIf="form.reg_mobile.errors.minlength">Please enter 10 digit mobile number.</p>   
+                                    <p *ngIf="form.reg_mobile.errors.maxlength">Please enter 10 digit mobile number.</p>   
+                                </div>   
+                            </div>
+                            <div class="form-group" *ngIf="display_register_otp">
+                                <label>OTP</label>
+                                <input type="text" formControlName="reg_otp" class="form-control" placeholder="OTP">
+                                <div *ngIf="otp_failed" class="text-danger">    
+                                    <p>Please enter correct OTP.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" formControlName="reg_password" class="form-control" placeholder="Password">
+                                <div *ngIf="isSubmittedRegister&&form.reg_password.errors" class="text-danger">    
+                                    <p *ngIf="form.reg_password.errors.required">Please enter password.</p>
+                                    <p *ngIf="form.reg_password.errors.minlength">Password must be at least 6 characters</p> 
+                                </div>   
+                            </div>
+                            <div class="form-group">
+                                <label>Repeat Password</label>
+                                <input type="password" formControlName="reg_confirm_password" class="form-control" placeholder="Password">
+                                <div *ngIf="isSubmittedRegister&&form.reg_confirm_password.errors" class="text-danger">    
+                                    <p *ngIf="form.reg_confirm_password.errors.required">Please enter Password.</p>
+                                    <p *ngIf="form.reg_confirm_password.errors.mustMatch">Passwords must match</p>
+                                </div>   
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2 mt-md-3 mt-lg-4">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

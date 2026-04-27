@@ -1,0 +1,56 @@
+<div class="dashboard">
+    <div class="dashboard__profile card profile-card">
+        <div class="card-body profile-card__body">
+            <div class="profile-card__avatar">
+                <img src="./assets/images/avatars/avatar-3.jpg" alt="">
+            </div>
+            <div class="profile-card__name">{{login_user_data.CustomerFullName}}</div>
+            <div class="profile-card__email"><span *ngIf="login_user_data.CustomerEmail">{{login_user_data.CustomerEmail}}</span><span *ngIf="!login_user_data.CustomerEmail">N/A</span></div>
+            <div class="profile-card__edit">
+                <a routerLink="../profile" class="btn btn-secondary btn-sm">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard__address card address-card address-card--featured">
+        <div class="address-card__badge" *ngIf="address.DefaultAddress">Default Address</div>
+        <div class="address-card__body">
+            <div class="address-card__name">{{address.Alias}}</div>
+            <div class="address-card__row">
+                {{ address.State }}<br>
+                {{ address.PinCode }}, {{ address.City }}<br>
+                {{ address.FullAddress }}
+            </div>
+            <div class="address-card__footer">
+                <a routerLink="/account/addresses/{{address.AddressKey}}">Edit Address</a>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard__orders card">
+        <div class="card-header">
+            <h5>Recent Orders</h5>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-table">
+            <div class="table-responsive-sm">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let order of orders">
+                        <td><a [routerLink]="'/account/orders/' + order.OrderKey">#{{ order.id }}</a></td>
+                        <td>{{ order.date }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.total|currencyFormat }} for {{ order.quantity }} item(s)</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

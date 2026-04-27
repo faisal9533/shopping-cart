@@ -1,0 +1,128 @@
+<div class="card">
+  <div class="order-header">
+    <app-alert *ngIf="orderSuccess" type="primary" size="lg">
+      Payment success
+    </app-alert>
+    <div class="order-header__actions">
+      <a routerLink="/account/orders" class="btn btn-xs btn-secondary">
+        Back to list
+      </a>
+    </div>
+
+    <h5 class="order-header__title">Order #{{ order.id }}</h5>
+    <div class="order-header__subtitle">
+      Was placed on
+      <mark class="order-header__date">{{ order.date }}</mark>
+      and is currently
+      <mark class="order-header__status">{{ order.status }}</mark>
+      .
+    </div>
+  </div>
+  <div class="card-divider"></div>
+  <div class="card-table">
+    <div class="table table-responsive-sm">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Return Qty</th>
+            <th>Rate</th>
+            <th class="text-right">Total</th>
+          </tr>
+        </thead>
+        <tbody class="card-table__body card-table__body--merge-rows">
+          <tr *ngFor="let item of order.items">
+            <td>{{ item.name }}</td>
+
+            <td data-title="Quantity">
+              {{ item.quantity }}
+            </td>
+            <td>
+              <app-input-number
+                aria-label="Quantity"
+                (parentFun)="parentFun($event)"
+                [readonly]="true"
+                class="product__quantity"
+                size="sm"
+                [min]="0"
+                [max]="item.ValidReturnQty"
+                [item]="item"
+                [formControl]="quantity"
+              ></app-input-number>
+            </td>
+            <td>{{ item.rate }}</td>
+            <td class="text-right">{{ item.total | currencyFormat }}</td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <th colspan="3">Total</th>
+            <td class="text-right" colspan="3">
+              {{ order.total | currencyFormat }}
+            </td>
+          </tr>
+          <tr>
+            <th colspan="3"></th>
+            <td class="text-right" colspan="3">
+                <button
+                *ngIf="showReturnBtn"
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  (click)="return()"
+                >
+                  Return
+                </button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-3 no-gutters mx-n2">
+  <div class="col-sm-6 col-12 px-2">
+    <div class="card address-card address-card--featured">
+      <div class="address-card__body">
+        <div class="address-card__badge address-card__badge--muted">
+          Shipping Address
+        </div>
+        <div class="address-card__name">{{ order.CustomerName }}</div>
+        <div class="address-card__row">
+          {{ order.DeliveryAddress }}
+        </div>
+        <div class="address-card__row">
+          <div class="address-card__row-title">Phone Number</div>
+          <div class="address-card__row-content">{{ order.CustomerPhone }}</div>
+        </div>
+        <div class="address-card__row">
+          <div class="address-card__row-title">Email Address</div>
+          <div class="address-card__row-content">{{ order.CustomerEmail }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-12 px-2 mt-sm-0 mt-3">
+    <div class="card address-card address-card--featured">
+      <div class="address-card__body">
+        <div class="address-card__badge address-card__badge--muted">
+          Order Information
+        </div>
+        <div class="address-card__row">
+          <div class="address-card__row-title">Payment Mode</div>
+          <div class="address-card__row-content">{{ order.paymentMethod }}</div>
+        </div>
+        <div class="address-card__row">
+          <div class="address-card__row-title">Order Status</div>
+          <div class="address-card__row-content">{{ order.status }}</div>
+        </div>
+        <div class="address-card__row" *ngIf="order.InvoiceID > 0">
+          <div class="address-card__row-title">Invoice #</div>
+          <div class="address-card__row-content">{{ order.InoviceNo }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

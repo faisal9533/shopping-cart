@@ -1,0 +1,126 @@
+<div class="account-menu">
+  <form
+    *ngIf="isShowLoginForm"
+    [formGroup]="loginForm"
+    class="account-menu__form"
+    (ngSubmit)="submitLogin()"
+  >
+    <!-- <div class="row">
+            <div class="col-12">
+                
+            </div>
+        </div> -->
+    <div class="account-menu__form-title">Log In to Your Account</div>
+    <app-alert
+      *ngIf="showAlert"
+      class="mb-3"
+      type="primary"
+      size="lg"
+      [dismissible]="true"
+      (close)="showAlert = false"
+    >
+      {{ display_register_login_page }}
+    </app-alert>
+    <div class="form-group">
+      <label for="header-signin-email" class="sr-only">Mobile No</label>
+      <input
+        formControlName="customerLoginMobile"
+        id="header-signin-email"
+        type="text"
+        class="form-control form-control-sm"
+        placeholder="Mobile No"
+      />
+      <div
+        *ngIf="isSubmittedLogin && loginFormData.customerLoginMobile.errors"
+        class="text-danger"
+      >
+        <p *ngIf="loginFormData.customerLoginMobile.errors.required">
+          Please enter mobile.
+        </p>
+        <p *ngIf="loginFormData.customerLoginMobile.errors.pattern">
+          Please enter valid mobile number.
+        </p>
+        <p *ngIf="loginFormData.customerLoginMobile.errors.minlength">
+          Please enter 10 digit mobile number.
+        </p>
+        <p *ngIf="loginFormData.customerLoginMobile.errors.maxlength">
+          Please enter 10 digit mobile number.
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="header-signin-password" class="sr-only">Password</label>
+      <div class="account-menu__form-forgot">
+        <input
+          formControlName="customerLoginPassword"
+          id="header-signin-password"
+          type="password"
+          class="form-control form-control-sm"
+          placeholder="Password"
+        />
+        <a
+          routerLink="/account/forgotPassword"
+          class="account-menu__form-forgot-link"
+        >
+          Forgot?
+        </a>
+      </div>
+    </div>
+    <div class="form-group account-menu__form-button">
+      <button type="submit" class="btn btn-primary btn-sm">Login</button>
+    </div>
+    <div class="account-menu__form-link">
+      <a routerLink="/account/login" (click)="closeMenu.emit()">
+        Create An Account
+      </a>
+    </div>
+  </form>
+  <div class="account-menu__divider"></div>
+  <a
+    *ngIf="!isShowLoginForm"
+    routerLink="/account/dashboard"
+    class="account-menu__user"
+    (click)="closeMenu.emit()"
+  >
+    <div class="account-menu__user-avatar">
+      <img src="assets/images/avatars/avatar-3.jpg" alt="" />
+    </div>
+    <div class="account-menu__user-info">
+      <div class="account-menu__user-name">
+        {{ login_user_data.CustomerFullName }}
+      </div>
+      <div class="account-menu__user-email">
+        <span *ngIf="login_user_data.CustomerEmail">
+          {{ login_user_data.CustomerEmail }}
+        </span>
+        <span *ngIf="!login_user_data.CustomerEmail">N/A</span>
+      </div>
+    </div>
+  </a>
+  <div class="account-menu__divider"></div>
+  <ul *ngIf="!isShowLoginForm" class="account-menu__links">
+    <li>
+      <a routerLink="/account/profile" (click)="closeMenu.emit()">
+        Edit Profile
+      </a>
+    </li>
+    <li>
+      <a routerLink="/account/orders" (click)="closeMenu.emit()">
+        Order History
+      </a>
+    </li>
+    <li>
+      <a routerLink="/account/addresses" (click)="closeMenu.emit()">
+        Addresses
+      </a>
+    </li>
+    <li>
+      <a routerLink="/account/password" (click)="closeMenu.emit()">Password</a>
+    </li>
+  </ul>
+  <div class="account-menu__divider"></div>
+  <ul *ngIf="!isShowLoginForm" class="account-menu__links">
+    <li><a (click)="logOut()">Logout</a></li>
+    <!-- <li><a routerLink="/account/login" (click)="closeMenu.emit()">Logout</a></li> -->
+  </ul>
+</div>
