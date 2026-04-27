@@ -1,4 +1,11 @@
 {
   "buildCommand": "npm run build:vercel",
-  "framework": "angular"
+  "framework": "angular",
+   "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://shoppingapp.pos-erp.in/api/:path*"
+    }
+  ]
 }
+
